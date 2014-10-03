@@ -23,7 +23,8 @@ class AltoRouter {
 	  */
 	public function __construct( $routes = array(), $basePath = '', $matchTypes = array() ) {
 		$this->addRoutes($routes);
-		$this->setBasePath($basePath);
+		//Basepath from .htaccess
+		$basePath?$this->setBasePath($basePath):$this->basePath = $_SERVER["BASE"];
 		$this->addMatchTypes($matchTypes);
 	}
 
@@ -51,10 +52,6 @@ class AltoRouter {
 	 * Set the base path.
 	 * Useful if you are running your application from a subdirectory.
 	 */
-	public function setBasePath($basePath) {
-		$this->basePath = $basePath;
-	}
-
 	/**
 	 * Add named match types. It uses array_merge so keys can be overwritten.
 	 *
